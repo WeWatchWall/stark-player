@@ -21,6 +21,7 @@
   <b-container fluid="lg" v-show="pageIndex === 0">
     <b-card title="Play" class="text-center">
       <b-form>
+        <b-form-group  :label="playPage.title"></b-form-group>
         <b-form-group label-for="audio-file" label-cols="auto">
           <audio currentTime=2 controls id="audio-file" :src="playPage.audioURL" type="audio/mpeg" v-on:play="play" v-on:ended="ended">
           </audio>
@@ -114,6 +115,7 @@
         CommandType: CommandType,
         playPage: {
           audioURL: null,
+          title: null,
           offsetPointer: StarkSequencer.offsetPointer
         },
         commandPage: {
@@ -183,6 +185,7 @@
             await flatPromise.promise;
             tracksOffset += playlistService.items[index-1].argValid.length * 1e3;
             this.playPage.audioURL = await playlistService.items[index].load();
+            this.playPage.title =  playlistService.items[index].argValid.title;
             await audioElement.load();
             await audioElement.play();
 
@@ -249,6 +252,7 @@
 
         this.resetTrack();
         this.playPage.audioURL = await playlistService.items[trackIndex].load();
+        this.playPage.title =  playlistService.items[trackIndex].argValid.title;
       },
       resetTrack: async function () {
         trackIndex = 0;
@@ -281,6 +285,7 @@
         }
 
         this.playPage.audioURL = await playlistService.items[trackIndex].load();
+        this.playPage.title =  playlistService.items[trackIndex].argValid.title;
       },
       commandLoad: async function (event) {
         let playlistFile;
