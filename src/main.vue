@@ -138,7 +138,6 @@
             await this.pause();
           }
           else if (commandState.commandType === CommandType.Stop) {
-            tracksOffset = 0;
             await this.pause();
           }
         } catch (error) {
@@ -248,7 +247,7 @@
           });
         }
 
-        await this.resetTrack();
+        this.resetTrack();
         this.playPage.audioURL = playlistService.items[trackIndex].state.URL;
       },
       resetTrack: async function () {
@@ -264,13 +263,19 @@
 
         let index = 0;
         let timeIndex = playlistService.items[index].argValid.length * 1e3 ;
-        
+
         while (timeIndex < timeNow) {
           if (index > 0) { tracksOffset += playlistService.items[index - 1].argValid.length * 1e3; }
           trackIndex = index;
 
           index++;
           timeIndex += playlistService.items[index].argValid.length * 1e3;
+        }
+
+        // Weird code: detects if the reset needed any fast-forwarding. 
+        if (index > 0) {
+          tracksOffset += playlistService.items[index - 1].argValid.length * 1e3;
+          trackIndex = index;
         }
 
         this.playPage.audioURL = playlistService.items[trackIndex].state.URL;
@@ -281,7 +286,6 @@
         command.attachment = playlistFile;
         command.state = {...command.state, ...{
           commandType: CommandType.Stop,
-          isReset: true,
           startTime: undefined,
           pauseTime: undefined,
           unpauseTime: undefined

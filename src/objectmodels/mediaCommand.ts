@@ -77,8 +77,6 @@ export class MediaCommand {
         return;
       }
 
-      
-
       let parsedChange = await self.db.state.rel.parseRelDocs('command', [change.doc]);
       parsedChange = parsedChange.commands[0];
       let prevState = self.state;
