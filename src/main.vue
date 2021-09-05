@@ -89,6 +89,7 @@
   import { Playlist } from "./services/playlist";
   import { CommandType } from "./objectmodels/command.js";
   import { MediaCommand } from "./objectmodels/mediaCommand";
+import { ConfigState } from "./objectmodels/configState";
 
   const playlistService = new Playlist();
   var flatPromise = new FlatPromise();
@@ -127,7 +128,7 @@
     mounted: async function () {
       StarkSequencer.init({
         isSync: true,
-        host: 'https://192.168.0.73:3005'
+        host: `http://${ConfigState.state.STARK_HOST}:${ConfigState.state.STARK_PORT}`
       });
 
       command.eventEmitter.on('change', async commandState => {
