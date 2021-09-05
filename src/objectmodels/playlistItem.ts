@@ -1,3 +1,4 @@
+import JSZip from 'jszip';
 import assert from "browser-assert";
 import { ObjectModel } from "objectmodel";
 
@@ -24,18 +25,20 @@ export class PlaylistItem {
   async init() { throw new Error("This method is not implemented."); }
 
   async load() {
-    if (this.state) { return this.state.URL; }
+    if (!this.state) {
+      await this.save();
+    }
 
-    await this.save();
-    this.validateState();
     return this.state.URL;
   }
 
   async save() {
-    let blob = new File( [this.argValid.content], `${this.argValid.title}.mp3`, { type: 'audio/mpeg' } );	
+    let blob = new File([await ((this.argValid.content.file(this.argValid.fileName)).async('arraybuffer'))], `${this.argValid.fileName}.mp3`, { type: 'audio/mpeg' });
     this.state = {
       URL: URL.createObjectURL(blob)
     };
+
+    this.validateState();
   }
 
   toString() {
@@ -49,8 +52,9 @@ export class PlaylistItem {
 
   private newItemModel = ObjectModel({
     title: String,
+    fileName: String,
     length: Number,
-    content: ArrayBuffer
+    content: JSZip
   });
 
   private validateNew() {

@@ -182,7 +182,7 @@
           for (let index = trackIndex + 1; index < playlistService.items.length; index++) {
             await flatPromise.promise;
             tracksOffset += playlistService.items[index-1].argValid.length * 1e3;
-            this.playPage.audioURL = playlistService.items[index].state.URL;
+            this.playPage.audioURL = await playlistService.items[index].load();
             await audioElement.load();
             await audioElement.play();
 
@@ -234,13 +234,13 @@
 
           items.push({
             filename,
-            content: await ((zip.file(filename)).async('arraybuffer'))
+            content: zip
           });
         }
 
         for (const item of items) {
           await playlistService.add({
-            name: playlistService.order[item.filename].title,
+            title: playlistService.order[item.filename].title,
             fileName: item.filename,
             length: playlistService.order[item.filename].length,
             content: item.content
@@ -248,7 +248,7 @@
         }
 
         this.resetTrack();
-        this.playPage.audioURL = playlistService.items[trackIndex].state.URL;
+        this.playPage.audioURL = await playlistService.items[trackIndex].load();
       },
       resetTrack: async function () {
         trackIndex = 0;
@@ -269,16 +269,18 @@
           trackIndex = index;
 
           index++;
+          if (index === playlistService.items.length) { break; }
+
           timeIndex += playlistService.items[index].argValid.length * 1e3;
         }
 
         // Weird code: detects if the reset needed any fast-forwarding. 
-        if (index > 0) {
+        if (index > 0 && index < playlistService.items.length) {
           tracksOffset += playlistService.items[index - 1].argValid.length * 1e3;
           trackIndex = index;
         }
 
-        this.playPage.audioURL = playlistService.items[trackIndex].state.URL;
+        this.playPage.audioURL = await playlistService.items[trackIndex].load();
       },
       commandLoad: async function (event) {
         let playlistFile;

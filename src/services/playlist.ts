@@ -24,12 +24,11 @@ export class Playlist {
 
   async add(arg) {
     let item = new PlaylistItem(arg);
-    let itemURL = await item.load();
 
     let index = this.order[item.argValid.fileName].index;
     this.items[index] = item;
 
-    return itemURL;
+    return item;
   }
 
   async delete(index: number) {
