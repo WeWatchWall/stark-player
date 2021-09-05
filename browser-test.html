@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
+  <style>
+    @import './browser-test.css';
+  </style>
+  <body>
+    <div id="stark-player-0"></div>
+    <script type="module">
+      import StarkPlayer from "./dist/index.js";
+      
+      StarkPlayer({
+        package: 'stark-player',
+        pod: 0
+      });
+    </script>
+  </body>
+</html>
