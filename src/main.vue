@@ -294,6 +294,7 @@ import { ConfigState } from "./objectmodels/configState";
         command.attachment = playlistFile;
         command.state = {...command.state, ...{
           commandType: CommandType.Stop,
+          isReset: true,
           startTime: undefined,
           pauseTime: undefined,
           unpauseTime: undefined
