@@ -11,7 +11,7 @@ export default async function (arg) {
   Vue.use(BootstrapVue);
   Vue.use(IconsPlugin);
 
-  let config = new ConfigState(arg.config);
+  let config = new ConfigState(arg);
   config.init();
 
   new Vue({

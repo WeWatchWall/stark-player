@@ -27,9 +27,9 @@ export class MediaCommand {
     this.validateNew();
 
     this.db = new Database({
-      arg: { username: ConfigState.state.STARK_SERVICES_NAME, dbServer: ConfigState.state.STARK_DB_HOST },
-      username: ConfigState.state.STARK_SERVICES_NAME,
-      password: ConfigState.state.STARK_SERVICES_PASSWORD
+      arg: { username: ConfigState.state.config.STARK_SERVICES_NAME, dbServer: ConfigState.state.config.STARK_DB_HOST },
+      username: ConfigState.state.config.STARK_SERVICES_NAME,
+      password: ConfigState.state.config.STARK_SERVICES_PASSWORD
     });
     await this.db.load();
     this.db.state.setSchema(MediaCommand.commandSchema);

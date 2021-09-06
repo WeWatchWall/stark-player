@@ -128,7 +128,7 @@ import { ConfigState } from "./objectmodels/configState";
     mounted: async function () {
       StarkSequencer.init({
         isSync: true,
-        host: `http://${ConfigState.state.STARK_HOST}:${ConfigState.state.STARK_PORT}`
+        host: `http://${ConfigState.state.config.STARK_HOST}:${ConfigState.state.config.STARK_PORT}`
       });
 
       command.eventEmitter.on('change', async commandState => {
