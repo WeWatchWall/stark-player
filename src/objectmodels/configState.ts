@@ -18,8 +18,8 @@ export class ConfigState {
    * @param [arg.arg]
    * @param [validate] Is necessary because the arg could be used to load (future).
    */
-  constructor(validate = false) {
-    this.arg = config;
+  constructor(arg, validate = false) {
+    this.arg = arg;
     this.validate = validate;
     this.init();
   }
