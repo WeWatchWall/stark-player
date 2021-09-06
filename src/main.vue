@@ -181,20 +181,22 @@ import { ConfigState } from "./objectmodels/configState";
           audioElement.currentTime = (state.time - tracksOffset) / 1e3;
         });
 
-        try {
-          for (let index = trackIndex + 1; index < playlistService.items.length; index++) {
+        for (let index = trackIndex + 1; index < playlistService.items.length; index++) {
+          try {
             await flatPromise.promise;
-            tracksOffset += playlistService.items[index-1].argValid.length * 1e3;
-            this.playPage.audioURL = await playlistService.items[index].load();
-            this.playPage.title =  playlistService.items[index].argValid.title;
-            await audioElement.load();
-            await audioElement.play();
-
-            if (command.state.commandType === CommandType.Pause) {
-              await audioElement.pause();
-            }
+          } catch {
+            break;
           }
-        } catch (error) {
+          
+          tracksOffset += playlistService.items[index-1].argValid.length * 1e3;
+          this.playPage.audioURL = await playlistService.items[index].load();
+          this.playPage.title =  playlistService.items[index].argValid.title;
+          await audioElement.load();
+          await audioElement.play();
+
+          if (command.state.commandType === CommandType.Pause) {
+            await audioElement.pause();
+          }
         }
         
       },
@@ -205,7 +207,10 @@ import { ConfigState } from "./objectmodels/configState";
       },
       pause : async function () {
         isStarted = false;
-        if (flatPromise) { flatPromise.reject(); }
+        if (flatPromise) { 
+          flatPromise.reject(); 
+        }
+       
         flatPromise = new FlatPromise();
         StarkSequencer.monitorService.delete(0);
         unsubscribe();

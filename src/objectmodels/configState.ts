@@ -46,7 +46,7 @@ export class ConfigState {
 
   save() {
     if (ConfigState.state) { return; }
-    ConfigState.state = {...config, ...this.argValid};
+    ConfigState.state = { ...{ config }, ...this.argValid};
     this.validateState();
   }
 
@@ -58,8 +58,14 @@ export class ConfigState {
 
   // :() Constructor type?
   private newConfigModel = ObjectModel({
-    STARK_SERVICES_NAME: String,
-    STARK_SERVICES_PASSWORD: String
+    arg: Object,
+    config: ObjectModel({
+      STARK_HOST: String,
+      STARK_PORT: String,
+      STARK_DB_HOST: String,
+      STARK_SERVICES_NAME: String,
+      STARK_SERVICES_PASSWORD: String
+    })    
   });
 
   private validateNew() {
