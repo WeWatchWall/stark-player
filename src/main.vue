@@ -102,6 +102,7 @@ import { ConfigState } from "./objectmodels/configState";
   var unsubscribe;
 
   var command = new MediaCommand();
+  var monitor;
 
   export default Vue.extend({
     name: 'Main',
@@ -164,7 +165,7 @@ import { ConfigState } from "./objectmodels/configState";
         }
         isStarted = true;
 
-        let monitor = StarkSequencer.monitor({
+        monitor = StarkSequencer.monitor({
           length: 14.4e6,
           pollCallback: () => {
             let curTime = audioElement.currentTime; 
@@ -177,7 +178,7 @@ import { ConfigState } from "./objectmodels/configState";
           diffInterval: 2e2,  // Margin of error in milliseconds. Default: 100ms.
         });
 
-        unsubscribe = monitor.subscribe((_mutation, state) => {
+        unsubscribe = monitor.state.subscribe((_mutation, state) => {
           audioElement.currentTime = (state.time - tracksOffset) / 1e3;
         });
 
@@ -212,7 +213,7 @@ import { ConfigState } from "./objectmodels/configState";
         }
        
         flatPromise = new FlatPromise();
-        StarkSequencer.monitorService.delete(0);
+        monitor.delete();
         unsubscribe();
         await audioElement.pause();
       },
