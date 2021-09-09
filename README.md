@@ -10,7 +10,7 @@ UI package for playing .PLS playlists of MP3 files, running in the browser, on t
 The [Stark-Orchestrator](https://github.com/WeWatchWall/stark-orchestrator) project that runs the Core of the system needs to have been initialized for the server to respond to the browsng endpoint http://LAN_URL:STARK_PORT.
 Then, the following commands will use $STARK_HOME/.env to deploy the player package to the configured user:
 
-1. First, navigate to the packages folder of the Stark-Server project.
+1. First, navigate to the packages folder of the Stark-Orchestrator project.
   
   ```bash
   cd $STARK_HOME/packages
