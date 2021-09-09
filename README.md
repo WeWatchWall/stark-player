@@ -42,7 +42,7 @@ You can upload a .zip file containing:
 2. An .MP3 file for each entry in the .PLS file.
 
 Two example copyright-free playlists are included in the /example_playlists folder.
-[![This link describes how to work with .PLS playlists.]](https://www.thewindowsclub.com/what-is-a-pls-file)
+[This link describes how to work with .PLS playlists.](https://www.thewindowsclub.com/what-is-a-pls-file)
 
 For best results, keep all the files in the root level of the .zip archive.
 
