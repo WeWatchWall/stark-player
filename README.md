@@ -3,11 +3,11 @@
 [![Build and test status](https://github.com/WeWatchWall/stark-player/workflows/Lint%20and%20test/badge.svg)](https://github.com/WeWatchWall/stark-player/actions?query=workflow%3A%22Lint+and+test%22)
 [![NPM version](https://img.shields.io/npm/v/stark-player.svg)](https://www.npmjs.com/package/stark-player)
 
-UI package for playing .PLS playlists of MP3 files, running in the browser, on the Stark Orchestrator.
+UI package for playing .PLS playlists of MP3 files, running in the browser, on the Stark Orchestrator, built with Vue.js.
 
 ## Getting Started
 
-The Stark-Server project that runs the Stark Orchestrator Core or Edge needs to have been initialized. 
+The [Stark-Orchestrator](https://github.com/WeWatchWall/stark-orchestrator) project that runs the Core of the system needs to have been initialized for the server to respond to the browsng endpoint http://LAN_URL:STARK_PORT.
 Then, the following commands will use $STARK_HOME/.env to deploy the player package to the configured user:
 
 1. First, navigate to the packages folder of the Stark-Server project.

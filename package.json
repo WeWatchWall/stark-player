@@ -9,9 +9,13 @@
   },
   "license": "MIT",
   "keywords": [
-    "music",
     "stark",
+    "music",
     "vue",
+    "drones",
+    "iot",
+    "cloud",
+    "javascript",
     "typescript"
   ],
   "scripts": {
