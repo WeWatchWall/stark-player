@@ -25,7 +25,8 @@
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "clean": "rm -rf dist build package",
     "build-all": "yarn clean && yarn install",
-    "postinstall": "node build.js"
+    "postinstall": "node build.js",
+    "publish": "node publish.js"
   },
   "devDependencies": {
     "@types/jest": "^26.0.21",
