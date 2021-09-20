@@ -1,6 +1,6 @@
 {
   "name": "stark-player",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "description": "Mp3 player drone running on the stark orchestrator in browsers.",
   "author": "Adrian Burlacu <adrian.burlacu@live.com>",
   "repository": {
