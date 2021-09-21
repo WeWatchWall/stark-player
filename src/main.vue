@@ -89,7 +89,7 @@
   import { Playlist } from "./services/playlist";
   import { CommandType } from "./objectmodels/command.js";
   import { MediaCommand } from "./objectmodels/mediaCommand";
-import { ConfigState } from "./objectmodels/configState";
+  import { ConfigState } from "./objectmodels/configState";
 
   const playlistService = new Playlist();
   var flatPromise = new FlatPromise();
@@ -159,7 +159,8 @@ import { ConfigState } from "./objectmodels/configState";
       play: async function (event) {
         if (isStarted) { return; }
         audioElement = audioElement || event.currentTarget;
-        if (!command.state.startTime) {
+        
+        if (!command.state.startTime || command.state.commandType !== CommandType.Play) {
           await audioElement.pause();
           return;
         }
@@ -173,7 +174,7 @@ import { ConfigState } from "./objectmodels/configState";
 
             return curTime;
           },
-          start: command.state.startTime + (command.state.unpauseTime ? command.state.unpauseTime - command.state.pauseTime : 0),
+          start: command.state.startTime + command.state.sumPauseTime,
           pollInterval: 5e2,  // In milliseconds, min 15ms. Default: 100ms.
           diffInterval: 2e2,  // Margin of error in milliseconds. Default: 100ms.
         });
@@ -268,9 +269,8 @@ import { ConfigState } from "./objectmodels/configState";
         if (!(command && command.state && command.state.startTime)) {
           return;
         }
-        
-        let timeNow = Date.now() + StarkSequencer.offsetPointer.offset -
-          (command.state.startTime + (command.state.pauseTime ? (command.state.unpauseTime || Date.now()) - command.state.pauseTime : 0));
+
+        let timeNow = Date.now() + StarkSequencer.offsetPointer.offset - (command.state.startTime + command.state.sumPauseTime);
 
         let index = 0;
         let timeIndex = playlistService.items[index].argValid.length * 1e3 ;
@@ -303,9 +303,10 @@ import { ConfigState } from "./objectmodels/configState";
           isReset: true,
           startTime: undefined,
           pauseTime: undefined,
-          unpauseTime: undefined
+          sumPauseTime: 0
         }};
         await command.save();
+        this.$forceUpdate();
       },
       commandPlay: async function () {
         if (!command.state) {
@@ -322,12 +323,13 @@ import { ConfigState } from "./objectmodels/configState";
           command.state.pauseTime = Date.now() + StarkSequencer.offsetPointer.offset;
         } else if (command.state.commandType === CommandType.Pause) {
           command.state.commandType = CommandType.Play;
-          command.state.unpauseTime = Date.now() + StarkSequencer.offsetPointer.offset;
+          command.state.sumPauseTime += (Date.now() + StarkSequencer.offsetPointer.offset) - command.state.pauseTime;
+          command.state.pauseTime = undefined;
         } else if (command.state.commandType === CommandType.Stop) {
           command.state.commandType = CommandType.Play;
           command.state.startTime = Date.now() + StarkSequencer.offsetPointer.offset;
+          command.state.sumPauseTime = 0;
           command.state.pauseTime = undefined;
-          command.state.unpauseTime = undefined;
         }
 
         await command.save();
@@ -337,7 +339,7 @@ import { ConfigState } from "./objectmodels/configState";
         command.state.commandType = CommandType.Stop;
         command.state.startTime = undefined;
         command.state.pauseTime = undefined;
-        command.state.unpauseTime = undefined;
+        command.state.sumPauseTime = 0;
         await command.save();
         this.$forceUpdate();
       }
