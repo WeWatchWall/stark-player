@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+      /* @import './browser-test.css'; */
+    </style>
+  </head>
+  <body>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <div id="wwwall-0"></div>
+    <script type="module">
+      import WWWall from "./dist/index.js";
+      
+      WWWall({
+        package: 'wwwall',
+        pod: 0
+      });
+    </script>
+  </body>
+</html>
