@@ -281,7 +281,7 @@
             return curTime;
           },
           start: command.state.startTime + command.state.sumPauseTime,
-          pollInterval: 4e2,  // In milliseconds, min 15ms. Default: 100ms.
+          pollInterval: 6e2,  // In milliseconds, min 15ms. Default: 100ms.
           diffInterval: 150,  // Margin of error in milliseconds. Default: 100ms.
         });
 
