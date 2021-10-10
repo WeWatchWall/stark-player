@@ -4,6 +4,7 @@
 [![NPM version](https://img.shields.io/npm/v/stark-player.svg)](https://www.npmjs.com/package/stark-player)
 
 UI package for playing .PLS playlists of MP3 files, running in the browser, on the Stark Orchestrator, built with Vue.js.
+Demo: [WWWall Utility](https://wewatchwall.github.io/stark-player/)
 
 ## Getting Started
 
