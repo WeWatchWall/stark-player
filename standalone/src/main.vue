@@ -220,15 +220,20 @@
       
       await command.init();
 
-      // Sync to the UTC clock.
-      let post;
-      let result = await fetch(`https://worldtimeapi.org/api/timezone/Etc/UTC`, {
-        method: 'GET',
-        headers: { 'Accept': 'application/json' }
-      });
-      post = Date.now();
-      let json  = await result.json();
-      StarkSequencer.offsetPointer.offset = (new Date(json.utc_datetime).getTime() - post) / 2;
+      try {
+        // Sync to the UTC clock.
+        let post;
+        let result = await fetch(`https://worldtimeapi.org/api/timezone/Etc/UTC`, {
+          method: 'GET',
+          headers: { 'Accept': 'application/json' }
+        });
+        post = Date.now();
+        let json  = await result.json();
+        StarkSequencer.offsetPointer.offset = (new Date(json.utc_datetime).getTime() - post) / 2;
+      } catch (error) {
+        // May be offline.
+      }
+      
     },
     methods: {
       play: async function (event) {

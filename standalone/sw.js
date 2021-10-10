@@ -40,13 +40,15 @@ self.addEventListener('fetch', async event => {
     if (cachedResponse && cachedResponse.version !== networkRes.version) {
       caches.delete(cacheName);
       self.registration.unregister()
-      .then(function() {
-        return self.clients.matchAll();
-      })
-      .then(function(clients) {
-        clients.forEach(client => client.navigate(client.url))
-      });
+        .then(function () {
+          return self.clients.matchAll();
+        })
+        .then(function (clients) {
+          clients.forEach(client => client.navigate(client.url))
+        });
     }
+  } else if (req.url.endsWith('UTC')) {
+    event.respondWith(networkFirst(req));
   } else {
     event.respondWith(cacheFirst(req));
   }
