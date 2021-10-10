@@ -1,7 +1,8 @@
 export default `
   <ol>
   <li>Welcome to WWWall, the audio casting utility from <a href="https://wewatchwall.com" target="_blank">We Watch Wall Inc.</a>!</li>
-  <li>This web application will synchronize and play your playlists across browser-enabled devices. It works offline, so you can "Add to Homescreen" from your browser menu.</li>
+  <li>This web application will synchronize and play your playlists across browser-enabled devices.</li>
+  <li>Once loaded, the app works offline. Also you can "Add to Homescreen" from your browser menu.</li>
   <li>The best browser to use is the <a href="https://brave.com/" target="_blank">Brave Browser</a>. If on mobile, enable the "Background video playback" option. Chrome is also a good alternative.</li>
   <li>First, make sure that your device clock is synchronized to the internet for accuracy.</li>
   <li>Usually, your event organizer will send you a link with a file or a website with a playlist .zip file. <strong>For your security, only download files from trusted websites and email senders.</strong></li>
