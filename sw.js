@@ -1,14 +1,14 @@
 const cacheName = 'wwwall-pwa';
 const staticAssets = [
-  '/favicon.ico',
+  './favicon.ico',
   'https://polyfill.io/v3/polyfill.min.js?features=default',
-  '/manifest.json',
-  '/img/icon.png',
-  '/',
-  '/index.html',
-  '/index.css',
-  '/dist/index.js',
-  '/img/logo.png'
+  './manifest.json',
+  './img/icon.png',
+  './',
+  './index.html',
+  './index.css',
+  './dist/index.js',
+  './img/logo.png'
 ];
 
 self.addEventListener('install', async event => {
