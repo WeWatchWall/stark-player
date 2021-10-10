@@ -1,0 +1,17 @@
+{
+  "name": "WWWall",
+  "version": "1.0.0",
+  "short_name": "WWWall",
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#4f4f4f",
+  "description": "WWWall mp3 playlist casting utility.",
+  "theme_color": "#4f4f4f",
+  "icons": [
+    {
+      "src": "/img/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

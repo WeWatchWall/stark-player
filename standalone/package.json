@@ -1,7 +1,7 @@
 {
   "name": "wwwall",
   "version": "1.0.0",
-  "description": "Standalone mp3 player drone in browsers.",
+  "description": "WWWall mp3 playlist casting utility.",
   "author": "Adrian Burlacu <adrian.burlacu@live.com>",
   "license": "MIT",
   "keywords": [

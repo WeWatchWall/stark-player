@@ -5,6 +5,16 @@
     <style>
       /* @import './browser-test.css'; */
     </style>
+    <script type="module">
+      if ('serviceWorker' in navigator) { 
+        try {
+          await navigator.serviceWorker.register('./sw.js', { scope: '/' }); 
+        } catch (e) {
+          alert('Offline install failed!'); 
+        }
+      }
+    </script>
+    <link rel="manifest" href="./manifest.json">
   </head>
   <body>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>

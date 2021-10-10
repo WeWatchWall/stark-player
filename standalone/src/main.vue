@@ -24,7 +24,7 @@
     <b-card class="text-center">
       <b-form>
         <b-form-group label-for="log" label-cols="auto">
-          <b-img src="./logo.png" fluid alt="WWWall: Undo Evil!" class="w-75" style="margin-top: -3em;"></b-img>
+          <b-img src="./img/logo.png" fluid alt="WWWall: Undo Evil!" class="w-75" style="margin-top: -3em;"></b-img>
         </b-form-group>
 
         <b-form-group label-for="playlist-file" label-cols="auto">
@@ -147,7 +147,7 @@
   import { StarkSequencer } from "stark-sequencer";
 
   import { Playlist } from "./services/playlist";
-  import { CommandType } from "./objectmodels/command.js";
+  import { CommandType } from "./objectmodels/command";
 
   import { MediaCommand } from "./objectmodels/mediaCommand";
 
@@ -221,18 +221,17 @@
       await command.init();
 
       // Sync to the UTC clock.
-      let post;
-      let result = await fetch(`http://worldtimeapi.org/api/timezone/Etc/UTC`, {
-        method: 'GET',
-        headers: { 'Accept': 'application/json' }
-      });
-      post = Date.now();
-      let json  = await result.json();
-      StarkSequencer.offsetPointer.offset = (new Date(json.utc_datetime).getTime() - post) / 2;
+      // let post;
+      // let result = await fetch(`http://worldtimeapi.org/api/timezone/Etc/UTC`, {
+      //   method: 'GET',
+      //   headers: { 'Accept': 'application/json' }
+      // });
+      // post = Date.now();
+      // let json  = await result.json();
+      // StarkSequencer.offsetPointer.offset = (new Date(json.utc_datetime).getTime() - post) / 2;
     },
     methods: {
       play: async function (event) {
-        debugger;
         audioElement = audioElement || event.currentTarget;
         
         if (!command.state.startTime || command.state.commandType !== CommandType.Play) {
@@ -420,7 +419,7 @@
         }
 
         playlistFileContents = await readFileAsync(playlistFile);
-        debugger;
+
         command.attachment = playlistFileContents;
         command.state = {...command.state, ...{
           commandType: CommandType.Stop,
