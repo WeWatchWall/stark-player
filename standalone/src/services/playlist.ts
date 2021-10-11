@@ -16,7 +16,7 @@ export class Playlist {
     if (this.argValid.StartTime === 'Dynamic') {
       this.startTime = Math.ceil(Date.now() / 60e3) * 60e3;
     } else {
-      this.startTime = parseInt(this.argValid.startTime);
+      this.startTime = parseInt(this.argValid.StartTime);
     }
     
     for (let index = 0; index < this.argValid.NumberOfEntries; index++) {
