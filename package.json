@@ -1,6 +1,6 @@
 {
   "name": "stark-player",
-  "version": "0.8.9",
+  "version": "0.8.10",
   "description": "Mp3 player drone running on the stark orchestrator in browsers.",
   "author": "Adrian Burlacu <adrian.burlacu@live.com>",
   "repository": {
@@ -61,7 +61,7 @@
     "pouchdb-security-helper": "^2.1.2",
     "promise-retry": "^2.0.1",
     "relational-pouch": "^4.0.0",
-    "stark-sequencer": "^1.0.16",
+    "stark-sequencer": "^1.1.0",
     "vue": "^2.6.14",
     "vue-round-slider": "^1.0.1"
   }

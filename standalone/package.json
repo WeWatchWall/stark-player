@@ -33,7 +33,6 @@
   "dependencies": {
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
-    "browser-env-vars": "^1.1.1",
     "envfile": "^6.17.0",
     "events": "^3.3.0",
     "flat-promise": "^1.0.2",
@@ -42,7 +41,7 @@
     "jszip": "^3.7.1",
     "objectmodel": "^4.3.0",
     "promise-retry": "^2.0.1",
-    "stark-sequencer": "^1.0.16",
+    "stark-sequencer": "^1.1.0",
     "vue": "^2.6.14",
     "vue-round-slider": "^1.0.1"
   }
